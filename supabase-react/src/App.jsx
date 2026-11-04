@@ -11,7 +11,11 @@ function App() {
     const { data, error } = await supabase.functions.invoke(fnName, {
       body: { name: 'test' },
     })
-    setFnResult(error ? `${error.name}: ${error.message}` : `[${fnName}] ${data.message}`)
+    setFnResult(
+      error
+        ? `[${fnName}] ${error.name}: ${error.message}`
+        : `[${fnName}] ${data.message}`,
+    )
   }
 
   useEffect(() => {
@@ -55,6 +59,13 @@ function App() {
         onClick={() => testEdgeFunction('hello-world-manual')}
       >
         Test hello-world-manual
+      </button>
+      <button
+        type="button"
+        className="button block"
+        onClick={() => testEdgeFunction('hello-world-cors-error')}
+      >
+        Test hello-world-cors-error
       </button>
       {fnResult && <pre>{fnResult}</pre>}
       {!claims ? (
