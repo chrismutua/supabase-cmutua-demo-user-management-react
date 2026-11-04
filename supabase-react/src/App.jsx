@@ -5,6 +5,14 @@ import Account from './Account'
 
 function App() {
   const [claims, setClaims] = useState(null)
+  const [fnResult, setFnResult] = useState(null)
+
+  async function testEdgeFunction() {
+    const { data, error } = await supabase.functions.invoke('hello-world', {
+      body: { name: 'test' },
+    })
+    setFnResult(error ? `${error.name}: ${error.message}` : data.message)
+  }
 
   useEffect(() => {
     const loadClaims = async () => {
@@ -27,6 +35,10 @@ function App() {
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
+      <button type="button" className="button block" onClick={testEdgeFunction}>
+        Test hello-world
+      </button>
+      {fnResult && <pre>{fnResult}</pre>}
       {!claims ? (
         <Auth />
       ) : (
