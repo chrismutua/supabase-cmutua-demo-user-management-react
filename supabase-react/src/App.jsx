@@ -65,7 +65,7 @@ function App() {
         className="button block"
         onClick={() => testEdgeFunction('hello-world-manual-cors-error')}
       >
-        Test hello-world-cors-error error
+        Test hello-world manual cors error
       </button>
       {fnResult && <pre>{fnResult}</pre>}
       {!claims ? (
