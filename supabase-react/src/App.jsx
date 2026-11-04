@@ -7,11 +7,11 @@ function App() {
   const [claims, setClaims] = useState(null)
   const [fnResult, setFnResult] = useState(null)
 
-  async function testEdgeFunction() {
-    const { data, error } = await supabase.functions.invoke('hello-world', {
+  async function testEdgeFunction(fnName) {
+    const { data, error } = await supabase.functions.invoke(fnName, {
       body: { name: 'test' },
     })
-    setFnResult(error ? `${error.name}: ${error.message}` : data.message)
+    setFnResult(error ? `${error.name}: ${error.message}` : `[${fnName}] ${data.message}`)
   }
 
   useEffect(() => {
@@ -35,8 +35,26 @@ function App() {
 
   return (
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      <button type="button" className="button block" onClick={testEdgeFunction}>
+      <button
+        type="button"
+        className="button block"
+        onClick={() => testEdgeFunction('hello-world')}
+      >
         Test hello-world
+      </button>
+      <button
+        type="button"
+        className="button block"
+        onClick={() => testEdgeFunction('hello-world-cors')}
+      >
+        Test hello-world-cors
+      </button>
+      <button
+        type="button"
+        className="button block"
+        onClick={() => testEdgeFunction('hello-world-manual')}
+      >
+        Test hello-world-manual
       </button>
       {fnResult && <pre>{fnResult}</pre>}
       {!claims ? (
