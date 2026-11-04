@@ -42,30 +42,30 @@ function App() {
       <button
         type="button"
         className="button block"
-        onClick={() => testEdgeFunction('hello-world')}
+        onClick={() => testEdgeFunction('hello-world-auto-cors-error')}
       >
-        Test hello-world
+        Test hello-world Auto cors error
       </button>
       <button
         type="button"
         className="button block"
-        onClick={() => testEdgeFunction('hello-world-cors')}
+        onClick={() => testEdgeFunction('hello-world-auto-cors-success')}
       >
-        Test hello-world-cors
+        Test hello-world Auto cors success
       </button>
       <button
         type="button"
         className="button block"
-        onClick={() => testEdgeFunction('hello-world-manual')}
+        onClick={() => testEdgeFunction('hello-world-manual-cors-success')}
       >
-        Test hello-world-manual
+        Test hello-world-manual cors success
       </button>
       <button
         type="button"
         className="button block"
-        onClick={() => testEdgeFunction('hello-world-cors-error')}
+        onClick={() => testEdgeFunction('hello-world-manual-cors-error')}
       >
-        Test hello-world-cors-error
+        Test hello-world-cors-error error
       </button>
       {fnResult && <pre>{fnResult}</pre>}
       {!claims ? (
